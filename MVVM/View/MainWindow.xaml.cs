@@ -100,7 +100,7 @@ namespace RubyBingoApp
 
         private void SetTempId()
         {
-            string TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Data", "Temp"); // For testing
+            string TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Temp"); // For testing
             string filePath = Path.Combine(TempFolder, "BingoId.txt");
             filePath = Path.GetFullPath(filePath);
 
@@ -113,9 +113,12 @@ namespace RubyBingoApp
                 if (!Directory.Exists(Path.GetDirectoryName(TempFolder)))
                     Directory.CreateDirectory(Path.GetDirectoryName(TempFolder));
 
+                if (!File.Exists(filePath))
+                    File.Create(filePath);
+
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine($"{currentBingoId}");
+                    writer.WriteLine($"{GetBingoId()}");
                     writer.WriteLine($"{timeSaved}");
                     writer.WriteLine($"{daySaved}");
                     writer.WriteLine($"{yearSaved}");
@@ -125,7 +128,7 @@ namespace RubyBingoApp
 
         private void GetTempId()
         {
-            string TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Data", "Temp"); // For testing
+            string TempFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Temp"); // For testing
             string filePath = Path.Combine(TempFolder, "BingoId.txt");
             filePath = Path.GetFullPath(filePath);
 
