@@ -1,0 +1,322 @@
+﻿<UserControl x:Class="RubyBingoApp.MVVM.View.NewBoardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RubyBingoApp.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700"
+             Background="{DynamicResource Main-Bg}">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\Resources/NewBoardResource.xaml"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="35"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="17.5*"/>
+            <RowDefinition Height="82.5*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Canvas Grid.Row="1" Grid.Column="1">
+            <Label Canvas.Top="14.5" Canvas.Left="-0.5"
+                   Content="[Insert Icon]" 
+                   Style="{StaticResource BasicLabel}"
+                   MouseLeftButtonUp="HomeButton"
+                   FontSize="15"/>
+        </Canvas>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition MinWidth="75" MaxWidth="200"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="43"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.ColumnSpan="3" x:Name="ElapsedTimeLabel"
+                   HorizontalAlignment="Center"
+                   Content="Time 00:00:00" 
+                   Style="{StaticResource BasicLabel}"
+                   FontSize="20"
+                   VerticalAlignment="Top"/>
+
+            <Label Grid.Column="2" x:Name="RealTimeLabel"
+                   HorizontalAlignment="Left"
+                   Content="    00:00" 
+                   Style="{StaticResource BasicLabel}"
+                   Foreground="{DynamicResource Grey-Text}"
+                   FontSize="12"
+                   VerticalAlignment="Center"/>
+
+            <Label Grid.Column="0" Grid.Row="1"
+                   Width="100"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Content="Bingo" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource BasicLabel}"
+                   Foreground="{DynamicResource LightGrey-Text}"
+                   FontSize="15"
+                   MouseLeftButtonDown="BingoButton_Click"/>
+            <Label Grid.Column="1" Grid.Row="1"
+                   Width="75"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Content="Save" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource BasicLabel}"
+                   Foreground="{DynamicResource LightGrey-Text}"
+                   FontSize="15"
+                   MouseLeftButtonDown="SaveBoard"/>
+            <Label Grid.Column="2" Grid.Row="1"
+                   Width="100"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="Export" 
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource BasicLabel}"
+                   Foreground="{DynamicResource LightGrey-Text}"
+                   FontSize="15"
+                   MouseLeftButtonDown="ScreenshotButton_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".25*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="43"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="1" 
+                   HorizontalAlignment="Left"
+                   Content="AOT" 
+                   Style="{StaticResource BasicLabel}"
+                   FontSize="20"
+                   VerticalAlignment="Top"/>
+
+            <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   HorizontalContentAlignment="Center"
+                   Style="{StaticResource BasicLabel}"
+                   Foreground="{DynamicResource LightGrey-Text}"
+                   FontSize="15">
+                <TextBlock TextWrapping="NoWrap" 
+                           TextTrimming="CharacterEllipsis"
+                           Text="Always On Top"/>
+            </Label>
+
+            <Viewbox Grid.Column="2" 
+                     VerticalAlignment="Center" 
+                     HorizontalAlignment="Left"
+                     Width="25">
+                <CheckBox Cursor="Hand" 
+                          Background="{DynamicResource Main-Bg}" 
+                          BorderBrush="{DynamicResource White-Text}"
+                          Checked="CheckBox_Checked"
+                          Unchecked="CheckBox_Unchecked">
+                    <CheckBox.Template>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Grid>
+                                <!-- Border for custom shape -->
+                                <Border x:Name="Border"
+                                        Width="20"
+                                        Height="20"
+                                        CornerRadius="5"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="2" />
+
+                                <!-- Checkmark -->
+                                <Path x:Name="CheckMark"
+                                      Data="M 0 4 L 3 7 L 8 0"
+                                      Stretch="Uniform"
+                                      StrokeThickness="3"
+                                      Stroke="{DynamicResource Hit-Blue}"
+                                      Visibility="Collapsed" Margin="3,3,3,3"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <!-- Trigger for Checked state -->
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                                    <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource Hit-Blue}" />
+                                </Trigger>
+                                <!-- Trigger for Hover (remove highlight) -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource Hit-Yellow}" />
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsChecked" Value="True" />
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="CheckMark" Property="Stroke" Value="{DynamicResource Hit-Blue}" />
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </CheckBox.Template>
+                </CheckBox>
+
+            </Viewbox>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
+
+            <Grid.Resources>
+                <!-- Local override of the Hit-Border style -->
+                <Style x:Key="Hit-Border" TargetType="Border">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="7.5"/>
+                    <Setter Property="CornerRadius" Value="10"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style>
+
+                <Style x:Key="Hit-Blue-Border" TargetType="Border" BasedOn="{StaticResource Hit-Border}">
+                    <Setter Property="Background" Value="{DynamicResource Hit-Blue}"/>
+                </Style>
+
+                <Style x:Key="Hit-Yellow-Border" TargetType="Border" BasedOn="{StaticResource Hit-Border}">
+                    <Setter Property="Background" Value="{DynamicResource Hit-Yellow}"/>
+                </Style>
+
+                <Style x:Key="Hit-White-Border" TargetType="Border" BasedOn="{StaticResource Hit-Border}">
+                    <Setter Property="Background" Value="{DynamicResource Hit-White}"/>
+                </Style>
+
+                <Style x:Key="Hit-Grey-Border" TargetType="Border" BasedOn="{StaticResource Hit-Border}">
+                    <Setter Property="Background" Value="{DynamicResource Hit-Grey}"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ColLeft" Width="0.01*"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition x:Name="ColMid" Width="1*"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition x:Name="ColRight" Width="0.01*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="3" Width="4"
+                    Background="{DynamicResource DarkGrey-Text}"
+                    CornerRadius="2"/>
+
+            <GridSplitter x:Name="SplitterRight" 
+                          Grid.Column="3" 
+                          Width="10" 
+                          HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch"
+                          ResizeBehavior="PreviousAndNext"
+                          Background="Transparent"
+                          DragDelta="GridSplitter_DragDelta"/>
+
+
+            <UniformGrid Columns="5" Rows="5" Grid.Column="2" x:Name="BoardGrid">
+
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="1,1;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="2,1;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="3,1;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="4,1;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="5,1;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+
+
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="1,2;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="2,2;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="3,2;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="4,2;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="5,2;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+
+
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="1,3;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="2,3;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="3,3;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="4,3;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="5,3;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+
+
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="1,4;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="2,4;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="3,4;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="4,4;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="5,4;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+
+
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="1,5;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="2,5;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="3,5;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="4,5;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+                <Border Style="{StaticResource Hit-Grey-Border}" MouseLeftButtonDown="Click_HitTile" Tag="5,5;Normal">
+                    <TextBox Style="{StaticResource BoardTextBox}"/>
+                </Border>
+
+            </UniformGrid>
+        </Grid>
+
+    </Grid>
+</UserControl>

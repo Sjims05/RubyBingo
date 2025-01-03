@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="RubyBingoApp.MVVM.View.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RubyBingoApp.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="\Resources/SettingResource.xaml"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="11*" MinHeight="75"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*" MinWidth="75"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="1" Grid.Row="4"
+            Background="Transparent">
+            <Viewbox Stretch="Uniform"
+                 MinHeight="5"
+                 MinWidth="37.5">
+                <Image Source="pack://application:,,,/Assets/ScrollTriangle.png" 
+                   Stretch="Fill"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   RenderOptions.BitmapScalingMode="HighQuality" 
+                   UseLayoutRounding="True"
+                   Width="200"
+                   Height="25"/>
+            </Viewbox>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="1">
+            <Label Foreground="{DynamicResource White-Text}"
+           FontSize="35"
+           FontWeight="SemiBold">
+                <Canvas>
+                    <StackPanel>
+                        <TextBlock TextWrapping="NoWrap"
+                               TextTrimming="CharacterEllipsis"
+                               Text="Stats"
+                               Foreground="{DynamicResource White-Text}"/>
+
+                        <TextBlock TextWrapping="NoWrap" 
+                               TextTrimming="CharacterEllipsis"
+                               Text="‾‾‾‾‾‾‾"
+                               Foreground="{DynamicResource DarkGrey-Text}"/>
+                    </StackPanel>
+                </Canvas>
+            </Label>
+        </Border>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="3" 
+                  VerticalScrollBarVisibility="Hidden"
+                  MinWidth="650" MinHeight="300"
+                  MaxWidth="1500">
+            <StackPanel>
+                <Border Style="{StaticResource SettingView-BorderWidget}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="400"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="Total Games Played"/>
+                            <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                               Content="A number of all games played saved"
+                               Grid.Row="1"/>
+                        </Grid>
+
+                        <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="0"
+                               FontSize="25"
+                               Margin="0,0,60,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Grid.Column="1"
+                               x:Name="TGP"/>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource SettingView-BorderWidget}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="400"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="Total Game Time"/>
+                            <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                               Content="Total min played for saved games"
+                               Grid.Row="1"/>
+                        </Grid>
+
+                        <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="0 min"
+                               FontSize="25"
+                               Margin="0,0,60,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Grid.Column="1"
+                               x:Name="TGT"/>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource SettingView-BorderWidget}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="370"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="Average Game Time"/>
+                            <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                               Content="Average Time for games played saved"
+                               Grid.Row="1"/>
+                        </Grid>
+                        
+                        <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="0 min"
+                               FontSize="25"
+                               Margin="0,0,60,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Grid.Column="1"
+                               x:Name="AGT"/>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource SettingView-BorderWidget}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0*"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                               Content="HEG Stats"/>
+                            <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                               Content="a collection of Hits Every Game stats"
+                               Grid.Row="1"/>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0"
+                                       Content="Average"
+                                       Grid.Column="0"/>
+                                <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0"
+                                       Content="Most"
+                                       Grid.Column="1"/>
+                                <Label Style="{StaticResource SettingView-WidgetSmallLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0"
+                                       Content="Least"
+                                       Grid.Column="2"/>
+
+                                <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0"
+                                       Content="0"
+                                       Grid.Column="0" Grid.Row="1"
+                                       x:Name="AHEG"/>
+                                <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0"
+                                       Content="0"
+                                       Grid.Column="1" Grid.Row="1"
+                                       x:Name="MHEG"/>
+                                <Label Style="{StaticResource SettingView-WidgetBigLabel}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,0,0,15"
+                                       Content="0"
+                                       Grid.Column="2" Grid.Row="1"
+                                       x:Name="LHEG"/>
+
+                            </Grid>
+                            
+                        </Grid>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

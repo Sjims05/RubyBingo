@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\BingoBoard.png" />
+    <None Remove="Assets\BingoCustomBoard.png" />
+    <None Remove="Assets\HourGlass.png" />
+    <None Remove="Assets\HourGlassColor.png" />
+    <None Remove="Assets\Icon.png" />
+    <None Remove="Assets\ScrollTriangle.png" />
+    <None Remove="Assets\ScrollTriangleBlue.png" />
+    <None Remove="Data\RubyQuotes.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\BingoBoard.png" />
+    <Resource Include="Assets\BingoCustomBoard.png" />
+    <Resource Include="Assets\HourGlass.png" />
+    <Resource Include="Assets\HourGlassColor.png" />
+    <Resource Include="Assets\ScrollTriangle.png" />
+    <Resource Include="Assets\ScrollTriangleBlue.png" />
+    <Content Include="Data\RubyQuotes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

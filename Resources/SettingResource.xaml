@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources/Themes/ActiveTheme.xaml"/>
+        <ResourceDictionary Source="\Resources/UniversalResource.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="SettingView-BorderWidget" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource Dark-Bg}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkGrey-Text}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Margin" Value="0,0,0,25"/>
+    </Style>
+
+    <Style x:Key="SettingView-WidgetBigLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource White-Text}"/>
+        <Setter Property="Margin" Value="25,10,0,0"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="SettingView-WidgetSmallLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource Grey-Text}"/>
+        <Setter Property="Margin" Value="25,0,0,15"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <ControlTemplate x:Key="SettingView-SwitchToggle" TargetType="ToggleButton">
+        <Border x:Name="background" 
+                Background="#08B4E7" Opacity="1"
+                Width="60" Height="25" CornerRadius="5" 
+                BorderThickness="1" BorderBrush="{DynamicResource DarkGrey-Text}">
+            <Canvas>
+                <Border Width="20" Height="20" x:Name="border"
+                        Background="{DynamicResource Main-Bg}" 
+                        Margin="1.5" CornerRadius="3.5" 
+                        Canvas.Left="0"/>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(Canvas.Left)"
+                                         From="0" To="35" Duration="0:0:0.15"/>
+                        <ColorAnimation Storyboard.TargetName="background"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        From="#08B4E7" To="#E7C600" Duration="0:0:0.15"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(Canvas.Left)"
+                                         From="35" To="0" Duration="0:0:0.15"/>
+                        <ColorAnimation Storyboard.TargetName="background"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        From="#E7C600" To="#08B4E7" Duration="0:0:0.15"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SettingView-SwitchToggle-StartingTrue" TargetType="ToggleButton">
+        <Border x:Name="background" 
+                Background="#E7C600" Opacity="1"
+                Width="60" Height="25" CornerRadius="5" 
+                BorderThickness="1" BorderBrush="{DynamicResource DarkGrey-Text}">
+            <Canvas>
+                <Border Width="20" Height="20" x:Name="border"
+                        Background="{DynamicResource Main-Bg}" 
+                        Margin="1.5" CornerRadius="3.5" 
+                        Canvas.Left="35"/>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(Canvas.Left)"
+                                         From="35" To="0" Duration="0:0:0.15"/>
+                        <ColorAnimation Storyboard.TargetName="background"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        From="#E7C600" To="#08B4E7" Duration="0:0:0.15"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(Canvas.Left)"
+                                         From="0" To="35" Duration="0:0:0.15"/>
+                        <ColorAnimation Storyboard.TargetName="background"
+                                        Storyboard.TargetProperty="Background.Color"
+                                        From="#08B4E7" To="#E7C600" Duration="0:0:0.15"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

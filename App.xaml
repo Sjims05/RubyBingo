@@ -1,0 +1,42 @@
+﻿<Application x:Class="RubyBingoApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RubyBingoApp"
+             xmlns:viewModel="clr-namespace:RubyBingoApp.MVVM.ViewModel"
+             xmlns:view="clr-namespace:RubyBingoApp.MVVM.View">
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <view:HomeView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+            <view:SettingsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:NewBoardViewModel}">
+            <view:NewBoardView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:SavedBoardViewModel}">
+            <view:SavedBoardView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StatsViewModel}">
+            <view:StatsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:MainStylingViewModel}">
+            <view:MainStylingView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:BasicStylingViewModel}">
+            <view:BasicStylingView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:AdvancedStylingViewModel}">
+            <view:AdvancedStylingView/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>

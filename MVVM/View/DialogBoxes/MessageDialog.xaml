@@ -1,0 +1,104 @@
+﻿<Window x:Class="RubyBingoApp.MVVM.View.DialogBoxes.MessageDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RubyBingoApp.MVVM.View.DialogBoxes"
+        mc:Ignorable="d"
+        Title="MessageDialog"
+        Background="{DynamicResource Dark-Bg}"
+        SizeChanged="Window_SizeChanged"
+        Topmost="True"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="250"
+        MinHeight="150"
+        MaxWidth="600"
+        MaxHeight="450">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="10" 
+                      CornerRadius="0" 
+                      CaptionHeight="0"
+                      NonClientFrameEdges="Right"
+                      ResizeBorderThickness="11"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <ResourceDictionary Source="\Resources/MainWindowResource.xaml"/>
+    </Window.Resources>
+    
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Stretch" MouseDown="Grid_MouseDown" ClipToBounds="False" VerticalAlignment="Stretch">
+
+            <Label x:Name="TitleLabel" 
+                   Background="Transparent"
+                   Content="Message" 
+                   Foreground="{DynamicResource Grey-Text}" 
+                   FontWeight="Bold" 
+                   Height="25"
+                   Margin="10,0,0,1" ClipToBounds="False"/>
+
+            <Button HorizontalAlignment="Right"
+                    Width="25" 
+                    Height="25" 
+                    Content="⨉" 
+                    Foreground="{DynamicResource Grey-Text}" 
+                    Background="Transparent" 
+                    BorderThickness="0" 
+                    FontSize="15" 
+                    FontWeight="Bold" 
+                    Margin="0,0,5,0" 
+                    Click="ButtonExit_Click"
+                    Template="{StaticResource WindowButtons}"/>
+        </Grid>
+
+        <Border Grid.Row="1" 
+                Background="{DynamicResource Main-Bg}" 
+                CornerRadius="10"
+                BorderThickness=".5"
+                BorderBrush="{DynamicResource Grey-Text}">
+
+            <TextBlock x:Name="MessageTextBlock" 
+                       Background="Transparent"
+                       TextWrapping="Wrap"
+                       Foreground="{DynamicResource LightGrey-Text}"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="Text"
+                       Margin="15,20,15,20"/>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{DynamicResource Main-Bg}" 
+                    CornerRadius="10"
+                    BorderThickness=".5"
+                    BorderBrush="{DynamicResource Grey-Text}"
+                    Height="25"
+                    Width="75"
+                    HorizontalAlignment="Right"
+                    Margin="10,0,10,0"
+                    MouseLeftButtonDown="Click_Ok">
+                
+                <Label Style="{StaticResource BasicLabel}" 
+                       HorizontalAlignment="Center"
+                       FontSize="12.5"
+                       Foreground="{DynamicResource Grey-Text}"
+                       Content="Ok"
+                       Padding="0"/>
+            </Border>
+
+        </Grid>
+        
+    </Grid>
+</Window>
